@@ -11,40 +11,39 @@ class php56u::params {
 
   case $::osfamily {
     'RedHat': {
-      case $::lsbmajdistrelease {
-        '7': {
-          $php_packages = [
-            'php56u',
-            'php56u-bcmath',
-            'php56u-cli',
-            'php56u-common',
-            'php56u-dba',
-            'php56u-devel',
-            'php56u-fpm',
-            'php56u-gd',
-            'php56u-intl',
-            'php56u-ldap',
-            'php56u-mbstring',
-            'php56u-mcrypt',
-            'php56u-mssql',
-            'php56u-mysqlnd',
-            'php56u-pdo',
-            'php56u-pear',
-            'php56u-process',
-            'php56u-xml'
-          ]
+      $php_packages = [
+        'php56u',
+        'php56u-bcmath',
+        'php56u-cli',
+        'php56u-common',
+        'php56u-dba',
+        'php56u-devel',
+        'php56u-fpm',
+        'php56u-gd',
+        'php56u-intl',
+        'php56u-ldap',
+        'php56u-mbstring',
+        'php56u-mcrypt',
+        'php56u-mssql',
+        'php56u-mysqlnd',
+        'php56u-pdo',
+        'php56u-pear',
+        'php56u-process',
+        'php56u-xml'
+      ]
 
-          file { '/etc/httpd/conf.d/php.conf':
-            ensure  => present,
-            owner   => 'root',
-            group   => 'root',
-            mode    => '0644',
-            content => template('php56u/php.erb'),
-          }
-        }
-        default: {
-          fail("The ${module_name} module is not supported on an ${::osfamily} ${::operatingsystemmajrelease} distribution.")
-        }
+      exec { 'pecl-update-channels':
+        command => '/usr/bin/pecl update-channels',
+        timeout => 10000,
+        require => Package[$::php56u::params::php_packages],
+      }
+
+      file { '/etc/httpd/conf.d/php.conf':
+        ensure  => present,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        content => template('php56u/php.erb'),
       }
     }
     default: {

@@ -5,15 +5,10 @@ define php56u::pecl (
 
   $ext = $title
 
-  exec { 'pecl-update-channels':
-    command => '/usr/bin/pecl update-channels',
-    timeout => 10000,
-    before  => Package[$ext]
-  }
-
   package { $ext:
     ensure   => $ensure,
-    provider => 'pecl'
+    provider => 'pecl',
+    require  => Package[$::php56u::params::php_packages],
   }
 
 }
