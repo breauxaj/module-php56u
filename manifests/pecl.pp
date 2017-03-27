@@ -3,9 +3,9 @@ define php56u::pecl (
 ) {
   include ::php56u
 
-  $ext = $title
+  $extension = $title
 
-  package { $ext:
+  package { $extension:
     ensure   => $ensure,
     provider => 'pecl',
     require  => Package[$::php56u::params::php_packages],
