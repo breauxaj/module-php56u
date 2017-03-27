@@ -37,14 +37,6 @@ class php56u::params {
         timeout => 10000,
         require => Package[$::php56u::params::php_packages],
       }
-
-      file { '/etc/httpd/conf.d/php.conf':
-        ensure  => present,
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-        content => template('php56u/php.erb'),
-      }
     }
     default: {
       fail("The ${module_name} module is not supported on an ${::osfamily} based system.")
