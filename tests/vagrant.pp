@@ -5,7 +5,8 @@ node default {
   package { 'gcc': ensure => 'present' }
   package { 'httpd': ensure => 'present' }
   package { 'openssl-devel': ensure => 'present' }
-  
+
+  php56u::pecl { 'newt': ensure => 'present' }
   php56u::pecl { 'xdebug': ensure => 'present' }
 
 }
