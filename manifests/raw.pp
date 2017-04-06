@@ -10,7 +10,7 @@ define php56u::raw (
     group   => 'root',
     mode    => '0644',
     content => $content,
-    require => Package[$::php70u::params::php_packages],
+    require => Package[$::php56u::params::php_packages],
   } ~> Exec['php-apachectl-restart']
 
 }

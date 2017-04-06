@@ -14,6 +14,7 @@ node default {
 
   package { 'gcc': ensure => present }
   package { 'gcc-c++': ensure => present }
+  package { 'newt-devel': ensure => present }
   package { 'openssl-devel': ensure => present }
 
   package { 'httpd': ensure => present }
@@ -35,8 +36,8 @@ xdebug.remote_host = 10.0.2.2
 xdebug.idekey = PHPSTORM'
   }
 
-  php56u::raw { '25-memprof':
-    content => 'extension=memprof.so'
+  php56u::raw { '25-newt':
+    content => 'extension=newt.so'
   }
 
 }
