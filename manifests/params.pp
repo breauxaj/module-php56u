@@ -18,7 +18,6 @@ class php56u::params {
         'php56u-common',
         'php56u-dba',
         'php56u-devel',
-        'php56u-fpm',
         'php56u-gd',
         'php56u-intl',
         'php56u-ldap',
@@ -31,12 +30,6 @@ class php56u::params {
         'php56u-process',
         'php56u-xml'
       ]
-
-      exec { 'pecl-update-channels':
-        command => '/usr/bin/pecl update-channels',
-        timeout => 10000,
-        require => Package[$::php56u::params::php_packages],
-      }
     }
     default: {
       fail("The ${module_name} module is not supported on an ${::osfamily} based system.")

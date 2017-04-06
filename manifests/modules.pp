@@ -7,6 +7,7 @@ define php56u::modules (
 
   package { "php56u-${required}":
     ensure  => $ensure,
-  }
+    require => Package[$::php56u::params::php_packages],
+  } ~> Exec['php-apachectl-restart']
 
 }

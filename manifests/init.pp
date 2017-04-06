@@ -35,4 +35,16 @@ class php56u (
   $raw = hiera_hash('php::raw',{})
   create_resources('php56u::raw',$raw)
 
+  exec { 'php-apachectl-restart':
+    command     => '/usr/sbin/apachectl restart',
+    onlyif      => '/usr/bin/test -x /usr/sbin/apachectl',
+    refreshonly => true
+  }
+
+  exec { 'pecl-update-channels':
+    command => '/usr/bin/pecl update-channels',
+    timeout => 10000,
+    require => Package[$::php56u::params::php_packages]
+  }
+
 }

@@ -9,6 +9,6 @@ define php56u::pecl (
     ensure   => $ensure,
     provider => 'pecl',
     require  => Package[$::php56u::params::php_packages],
-  }
+  } ~> Exec['php-apachectl-restart']
 
 }

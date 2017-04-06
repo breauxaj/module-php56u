@@ -12,6 +12,6 @@ define php56u::config (
     onlyif  => "get ${key} != '${value}'",
     changes => "set ${key} '${value}'",
     require => Package[$::php56u::params::php_packages],
-  }
+  } ~> Exec['php-apachectl-restart']
 
 }
