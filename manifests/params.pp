@@ -11,25 +11,33 @@ class php56u::params {
 
   case $::osfamily {
     'RedHat': {
-      $php_packages = [
-        'php56u',
-        'php56u-bcmath',
-        'php56u-cli',
-        'php56u-common',
-        'php56u-dba',
-        'php56u-devel',
-        'php56u-gd',
-        'php56u-intl',
-        'php56u-ldap',
-        'php56u-mbstring',
-        'php56u-mcrypt',
-        'php56u-mssql',
-        'php56u-mysqlnd',
-        'php56u-pdo',
-        'php56u-pear',
-        'php56u-process',
-        'php56u-xml'
-      ]
+      case $::operatingsystem {
+        default: {
+          case $::operatingsystemmajrelease {
+            default: {
+              $php_packages = [
+                'php56u',
+                'php56u-bcmath',
+                'php56u-cli',
+                'php56u-common',
+                'php56u-dba',
+                'php56u-devel',
+                'php56u-gd',
+                'php56u-intl',
+                'php56u-ldap',
+                'php56u-mbstring',
+                'php56u-mcrypt',
+                'php56u-mssql',
+                'php56u-mysqlnd',
+                'php56u-pdo',
+                'php56u-pear',
+                'php56u-process',
+                'php56u-xml'
+              ]
+            }
+          }
+        }
+      }
     }
     default: {
       fail("The ${module_name} module is not supported on an ${::osfamily} based system.")
